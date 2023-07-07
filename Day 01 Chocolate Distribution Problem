@@ -1,0 +1,33 @@
+// (--- https://www.geeksforgeeks.org/chocolate-distribution-problem/ ---)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int minDiff(vector<int> chocolate, int m){
+    int n = chocolate.size();
+    sort(chocolate.begin(), chocolate.end());
+    
+    int mindiff = INT_MAX;
+    int j = m-1;
+    for(int i = 0 ; j < n ; i++){
+        int currdiff = chocolate[j]-chocolate[i];
+        // cout<<currdiff<<" "<<chocolate[j]<<" "<<chocolate[i]<<"\n";
+        if(currdiff <= mindiff){
+            mindiff = currdiff;
+        }
+        j++;
+    }
+   return mindiff;
+}
+
+int main(){
+    int n,m;
+    cin>>n>>m;
+    vector<int> chocolate(n);
+    for(int i = 0 ; i < n ; i++){
+        cin>>chocolate[i];
+    }
+    
+    cout<<minDiff(chocolate, m);
+    return 0;
+}
