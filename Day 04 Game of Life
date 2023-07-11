@@ -1,0 +1,79 @@
+// (--- https://leetcode.com/problems/game-of-life/ ---)
+
+
+
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+        int n = board.size();
+        int m = board[0].size();
+        vector<vector<int>> v ;
+        v = board;
+        
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+                int cntLive = 0;
+                //Diagonal upper left side;
+                if(i>0 && j > 0 && v[i-1][j-1] == 1){
+                    cntLive++;
+                }
+                //Diagonal upper right side;
+                if(i>0 && j < m-1 && v[i-1][j+1] == 1){
+                    cntLive++;
+                }
+                //Diagonal lower left side;
+                if(i < n-1 && j > 0 && v[i+1][j-1] == 1){
+                    cntLive++;
+                }
+                //Diagonal lower right side;
+                if(i < n-1 && j < m-1 && v[i+1][j+1] == 1){
+                    cntLive++;
+                }
+                //Upper side
+                if(i > 0 && v[i-1][j] == 1){
+                    cntLive++;
+                }
+                //lower side
+                if(i < n-1 && v[i+1][j] == 1){
+                    cntLive++;
+                }
+                //right side
+                if(j < m-1 && v[i][j+1] == 1){
+                    cntLive++;
+                }
+                if(j > 0 && v[i][j-1] == 1){
+                    cntLive++;
+                }
+                // Question Condition;
+
+                if(v[i][j] == 1){
+                    if(cntLive < 2){
+                        // cout<<cntLive<<" "<<i<<" "<<j<<"\n";
+                        board[i][j] = 0;
+                    }
+                    else if(cntLive <= 3){
+                        board[i][j] = 1;
+                    }
+                    else if(cntLive > 3){
+                        board[i][j] = 0;
+                    }
+
+                }
+                else{
+                    if(cntLive == 3){
+                        board[i][j] = 1;
+                    }
+                }
+                // cout<<i<<" "<<j<<" "<<cntLive<<"\n";
+            }
+
+        }
+        // board = v;
+        // for(int i = 0 ; i < n ; i++){
+        //     for(int j  = 0 ; j < m ; j++){
+        //         cout<<v[i][j]<<" ";
+        //     }
+        //     cout<<"\n";
+        // }
+    }
+};
