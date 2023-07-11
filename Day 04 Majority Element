@@ -1,0 +1,25 @@
+// (--- https://leetcode.com/problems/majority-element/ ---)
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int reqFreq = n/2;
+
+        unordered_map<int, int>ump;
+
+        for(auto x: nums){
+            
+            ump[x]++;
+            if(ump.at(x)> reqFreq){
+                return x;
+            }
+            
+        }
+        // for(auto x:ump){
+            
+        // }
+        return 0;
+    }
+};
