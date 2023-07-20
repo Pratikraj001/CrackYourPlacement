@@ -1,0 +1,60 @@
+// (--- https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/description/ ---)
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode *temp = head;
+        int dec = temp->val;
+        while(temp->next != NULL){
+            dec  = dec*2 + temp->next->val;
+            temp = temp->next;
+        }
+        return dec;
+    }
+};
+
+//part 2;
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+       
+        queue<int> que;
+        ListNode *temp = head;
+        st.push(temp->val);
+        int dec = 0;
+        while(temp != NULL){
+            que.push(temp->val);
+            temp = temp->next;
+        }
+        int pw = que.size()-1;
+        while(!que.empty()){
+            int ele = que.front();
+            dec += (ele*pow(2,pw));
+            que.pop();
+            pw--;
+        }
+        return dec;
+    }
+};
