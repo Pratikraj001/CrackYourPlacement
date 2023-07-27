@@ -1,0 +1,35 @@
+// (--- https://leetcode.com/problems/search-in-rotated-sorted-array/description/ ---)
+
+
+class Solution {
+public:
+    bool predicate(int mid, vector<int> &nums, int target){
+        int val;
+        if(target < nums[0] == nums[mid] < nums[0]){
+            val = nums[mid];
+            return val >= target;
+        }
+        if(target < nums[0]){
+            val =  INT_MIN;
+        }
+        else{
+            val = INT_MAX;
+        }
+        return val >= target;
+
+    }
+    int search(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size()-1;
+        while(low < high){
+            int mid = low + (high - low)/2;
+            if(predicate(mid, nums, target)){
+                high = mid;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return nums[low] == target ? low : -1;
+    }
+};
