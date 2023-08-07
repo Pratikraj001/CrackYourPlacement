@@ -1,0 +1,28 @@
+// (--- https://leetcode.com/problems/happy-number/description/ ---)
+
+// https://leetcode.com/problems/happy-number/solutions/3878873/simple-c-solution-fast-easy-understanding/
+
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_map<long, bool> ump;
+        
+        while(1){
+            ump[n] = true;
+            int i = 0;
+            while(n){
+                int r = n%10;
+                i += (r*r);
+                n = n/10;
+            }
+            n = i;
+            if(n == 1){
+                return true;
+            }
+            if(ump[n] == true){
+                return false;
+            }
+        }
+        return false;
+    }
+};
