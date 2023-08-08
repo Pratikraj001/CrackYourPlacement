@@ -1,0 +1,43 @@
+// (--- https://leetcode.com/problems/valid-square/description/ ---)
+
+
+class Solution {
+public:
+    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+        map <int, int> checkLen;
+        
+        int s1 = (p1[0]-p2[0])*(p1[0]-p2[0]) + (p1[1]-p2[1])*(p1[1]-p2[1]);
+        int s2 = (p2[0]-p3[0])*(p2[0]-p3[0]) + (p2[1]-p3[1])*(p2[1]-p3[1]);
+        int s3 = (p3[0]-p4[0])*(p3[0]-p4[0]) + (p3[1]-p4[1])*(p3[1]-p4[1]);
+        int s4 = (p4[0]-p1[0])*(p4[0]-p1[0]) + (p4[1]-p1[1])*(p4[1]-p1[1]);
+        int s5 = (p1[0]-p3[0])*(p1[0]-p3[0]) + (p1[1]-p3[1])*(p1[1]-p3[1]);
+        int s6 = (p2[0]-p4[0])*(p2[0]-p4[0]) + (p2[1]-p4[1])*(p2[1]-p4[1]);
+
+        checkLen[s1]++;
+        checkLen[s2]++;
+        checkLen[s3]++;
+        checkLen[s4]++;
+        checkLen[s5]++;
+        checkLen[s6]++;
+
+
+        int sideCnt = 0, diagCnt = 0, side, diag;
+
+        if(checkLen.size() != 2) return false;
+        for(auto& x:checkLen){
+            if(sideCnt == 0){
+                sideCnt = x.second;
+                side = x.first;
+            }
+            else{
+                diagCnt = x.second;
+                diag = x.first;
+            }
+        }
+
+        if(side == 0 || diag == 0) return false;
+
+        if((sideCnt == 4 && diagCnt == 2)) return true;
+        return false;
+    }
+};
