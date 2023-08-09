@@ -39,5 +39,6 @@ public:
 
         if((sideCnt == 4 && diagCnt == 2)) return true;
         return false;
+
     }
 };
